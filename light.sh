@@ -1,6 +1,6 @@
 #!/bin/env bash
 function light() {
-	if [[ -z $1 ]]
+	if [[ -z $1 ]] || ! [[ $1 =~ ^[0-9]+$ ]] 
 	then
 		echo "Usage: light ( 10-100 | min | low | max )"
 		return
@@ -31,7 +31,7 @@ function light() {
 	fi
 
 
-	echo $level | sudo tee /sys/class/backlight/nvidia_0/brightness
+	echo $level | sudo tee /sys/class/backlight/nvidia_0/brightness > /dev/null
 }
 
 export -f light
