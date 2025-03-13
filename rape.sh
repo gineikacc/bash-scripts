@@ -4,7 +4,8 @@ function rapego() {
 	cd ~/temp/img_scrape/
 	gallery-dl --destination . $1
 	mkdir -p ~/temp/img_scrape/.flat/
-	find . -type f -iname "*.*" | grep -v '.flat' | xargs -0 -I {} mv {} ~/temp/img_scrape/.flat/
+	find . -type f | grep -v '.flat' | sed 's/^/"/;s/$/"/'  \
+		| xargs mv -t ~/temp/img_scrape/.flat/
 	return
 }
 function rapecheck() {
